@@ -1,8 +1,9 @@
 const Pool = require('pg').Pool;
-const connectionString = process.env.DATABASE_URL;
+const connectionString = 'postgres://postgres:postgres@localhost:5432/Users';
+
 
 console.log(`DATABASE_URL: ${connectionString}`);
-
+// console.log('der', process.env)
 
 const pool = new Pool({
     connectionString: connectionString,
@@ -37,7 +38,7 @@ const createUser = (req, res) => {
         userAge = 0;
     }
 
-    pool.query('INSERT INTO users (fName, lName, email, age) VALUES ($1, $2, $3, $4) RETURNING *', [fName, lName, email, userAge], (err, results) => {
+    pool.query('INSERT INTO users ("fName", "lName", email, age) VALUES ($1, $2, $3, $4) RETURNING *', [fName, lName, email, userAge], (err, results) => {
         if (err) {
             throw err
         }
@@ -52,7 +53,7 @@ const updateUser = (req, res) => {
     let userAge = parseInt(age, 10);
 
     pool.query(
-        'UPDATE users SET fName = $1, lName = $2 , email = $2, age = $3 WHERE id = $5',
+        'UPDATE users SET "fName" = $1, "lName" = $2 , email = $2, age = $3 WHERE id = $5',
         [fName, lName, email, userAge, id],
         (err, results) => {
             if (err) {

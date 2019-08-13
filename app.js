@@ -1,11 +1,10 @@
 const express = require('express');
-const app = express();
 const path = require('path');
+const app = express();
 const db = require('./query');
 
-const port = process.env.PORT || 5432;
+const port = 3000;
 
-app.use(express.json);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.urlencoded({ extended: false }));
@@ -37,7 +36,6 @@ app.post('/deleteUser/:id', db.deleteUser, (req, res) => {
 });
 
 
-app.listen(port, (err) => {
-    if (err) console.log(err);
+app.listen(port, () => {
     console.log(`App Server listen on port: ${port}`);
 });
