@@ -1,0 +1,17 @@
+{
+  "name": "project_5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.6.0",
+    "pg": "^7.11.0",
+    "pug": "^2.0.3"
+  }
+}

@@ -1,0 +1,43 @@
+html
+    head
+        style
+            include style.css
+        scripts
+                link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css")
+ 
+    body
+        table
+            tr
+                th 
+                    form(action='/sortUser', method='POST')
+                        input(type='submit' value='ID' class="noButton")
+                th 
+                    form(action='/sortUser', method='POST')
+                        input(type='submit' value='First Name' class="noButton")
+                th 
+                    form(action='/sortUser', method='POST')
+                        input(type='submit' value='Last Name' class="noButton")
+                th 
+                    form(action='/sortUser', method='POST')
+                        input(type='submit' value='Email' class="noButton")
+                th 
+                    form(action='/sortUser', method='POST')
+                        input(type='submit' value='Age' class="noButton")
+            for user in userArray    
+                tr
+                    td= user._id
+                    td= user.fName
+                    td= user.lName
+                    td= user.email
+                    td= user.age
+                    td(class="noBorder")
+                        button
+                            a( href="/user/edit/" + user._id) Edit
+                    td(class="noBorder")
+                        form(action='/deleteUser/' + user.id, method='POST')
+                            input(type='submit' value='Delete' style="margin-top: 15px")
+            tr
+                td(class="noBorder")
+                    button
+                        a( href="/") Add new user
+                    

@@ -1,0 +1,47 @@
+html
+    head
+        style
+            include style.css
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css")
+         
+    body
+        script
+            include sort.js
+            include domReady.js
+        div
+            form(action='/findUsers/' method='POST')
+                div Search by name
+                div
+                    label(for='fName')
+                    input(id='fName', name='fName')
+                div
+                    input(type='submit' value='Go')        
+        table(class='ui sortable celled table')
+            thead
+                tr
+                    th ID
+                    th First Name
+                    th Last Name
+                    th Email
+                    th Age
+                    th Edit
+                    th Delete 
+            tbody        
+                for user in userArray    
+                    tr
+                        td= user._id
+                        td= user.fName
+                        td= user.lName
+                        td= user.email
+                        td= user.age
+                        td
+                            button
+                                a( href="/user/edit/" + user._id) &#x270E
+                        td
+                            form(action='/deleteUser/' + user.id, method='POST')
+                                input(type='submit' value='X' style="margin-top: 15px; color: red")
+        div
+            button
+                a( href="/") Add new user
+

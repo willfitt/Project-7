@@ -1,0 +1,18 @@
+html
+    head
+    body
+        form(action='/editUser/' + editUser._id method='POST') 
+            div
+                label(for='fName') First Name
+                input(id='fName', name='fName' value= editUser.fName)
+            div
+                label(for='lName') Last Name
+                input(id='lName', name='lName' value= editUser.lName)
+            div
+                label(for='age') Age
+                input(id='age', name='age' value= editUser.age)
+            div
+                label(for='email') Email
+                input(id='email', name='email' value= editUser.email)
+            div
+                input(type='submit')
