@@ -10,15 +10,22 @@ app.set('view engine', 'pug');
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-    res.render('createUser')
+    res.render('createUser');
 });
 
-app.get('/userList', db.getUsers);
+app.get('/userListing', (req, res) => {
+    db.getUsers()
+        .then((users) => {
+            console.log(users)
+            res.render('userListing', {users: users}); 
+        });
+});
 
 app.get('/user/edit/:id', db.getUserById);
 
-app.post('/createUser', db.createUser, (req, res) => {
-    res.redirect('/userList')
+app.post('/createUser', (req, res) => {
+    db.createUser(req, res)
+        .then(() => res.redirect('/userListing'));
 });
 
 // app.post('/sortUser', db.sortUser); implement??
@@ -28,11 +35,11 @@ app.post('/createUser', db.createUser, (req, res) => {
 // });  implement?
 
 app.post('/editUser/:id', db.updateUser, (req, res) => {
-    res.redirect('/userList')
+    res.redirect('/userListing')
 });
 
 app.post('/deleteUser/:id', db.deleteUser, (req, res) => {
-    res.redirect('/userList')
+    res.redirect('/userListing')
 });
 
 
