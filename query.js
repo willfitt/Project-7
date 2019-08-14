@@ -15,15 +15,9 @@ const getUsers = () =>
 
 const getUserById = (req, res) => {
   const id = parseInt(req.params.id);
-
   return pool
-    .query("SELECT * FROM users WHERE id = $1", [id], (err, results) => {
-      if (err) {
-        throw err;
-      }
-      return results.rows;
-    })
-    .then((response = response.rows[0]));
+    .query("SELECT * FROM users WHERE id = $1", [id])
+    .then((response => response.rows[0]));
 };
 
 const createUser = (req, res) => {
@@ -35,16 +29,18 @@ const createUser = (req, res) => {
     userAge = 0;
   }
 
-  return pool.query(
-    'INSERT INTO users ("fName", "lName", email, age) VALUES ($1, $2, $3, $4) RETURNING *',
-    [fName, lName, email, userAge],
-    // (err, results) => {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   console.log(`id: ${JSON.stringify(results.rows[0])}`);
-    //   return results.rows;
-    ).then(response => response.rows);
+  return pool
+    .query(
+      'INSERT INTO users ("fName", "lName", email, age) VALUES ($1, $2, $3, $4) RETURNING *',
+      [fName, lName, email, userAge]
+      // (err, results) => {
+      //   if (err) {
+      //     throw err;
+      //   }
+      //   console.log(`id: ${JSON.stringify(results.rows[0])}`);
+      //   return results.rows;
+    )
+    .then(response => response.rows);
 };
 
 const updateUser = (req, res) => {
