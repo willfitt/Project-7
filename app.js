@@ -40,11 +40,12 @@ app.post("/createUser", (req, res) => {
 
 app.post("/editUser/:id", (req, res) => {
   db.updateUser(req, res)
-  .then((req) => res.redirect("/userListing"));
+    .then((req) => res.redirect("/userListing"));
 });
 
-app.post("/deleteUser/:id", db.deleteUser, (req, res) => {
-  res.redirect("/userListing");
+app.post("/deleteUser/:id", (req, res) => {
+  db.deleteUser(req, res)
+    .then(() => res.redirect("/userListing"));
 });
 
 app.listen(port, () => {

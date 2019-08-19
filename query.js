@@ -58,15 +58,14 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-  const id = parseInt(req.body.userId);
+  const id = parseInt(req.params.id);
   console.log(`deleteUser id: ${id}`);
 
-  pool.query("DELETE FROM users WHERE id = $1", [id], (err, results) => {
-    if (err) {
-      throw err;
-    }
-    res.status(200).send(`User deleted with ID: ${id}`);
-  });
+  return pool.
+    query(
+      "DELETE FROM users WHERE id = $1", [id]
+    )
+    .then(response => response.rows);
 };
 
 module.exports = {
