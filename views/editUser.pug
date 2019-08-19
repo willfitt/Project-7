@@ -1,7 +1,7 @@
 html
     head
     body
-        form(action='/editUser/' + editUser._id method='POST') 
+        form(action='/editUser/' + editUser.id method='POST') 
             div
                 label(for='fName') First Name
                 input(id='fName', name='fName' value= editUser.fName)

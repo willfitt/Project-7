@@ -28,7 +28,8 @@ app.get("/user/edit/:id", (req, res) => {
 });
 
 app.post("/createUser", (req, res) => {
-  db.createUser(req, res).then(() => res.redirect("/userListing"));
+  db.createUser(req, res)
+    .then(() => res.redirect("/userListing"));
 });
 
 // app.post('/sortUser', db.sortUser); implement??
@@ -37,8 +38,9 @@ app.post("/createUser", (req, res) => {
 //         res.render('userListing');
 // });  implement?
 
-app.post("/editUser/:id", db.updateUser, (req, res) => {
-  res.redirect("/userListing");
+app.post("/editUser/:id", (req, res) => {
+  db.updateUser(req, res)
+  .then((req) => res.redirect("/userListing"));
 });
 
 app.post("/deleteUser/:id", db.deleteUser, (req, res) => {

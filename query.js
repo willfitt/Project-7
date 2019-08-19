@@ -44,20 +44,17 @@ const createUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-  const id = parseInt(req.body.id);
+  const id = parseInt(req.params.id);
   const { fName, lName, email, age } = req.body;
   let userAge = parseInt(age, 10);
+  console.log(req.params)
 
-  pool.query(
-    'UPDATE users SET "fName" = $1, "lName" = $2 , email = $2, age = $3 WHERE id = $5',
-    [fName, lName, email, userAge, id],
-    (err, results) => {
-      if (err) {
-        throw err;
-      }
-      res.status(200).send(`User modified with ID: ${id}`);
-    }
-  );
+  return pool
+    .query(
+      'UPDATE users SET "fName" = $1, "lName" = $2 ,email = $3, age = $4  WHERE id = $5',
+      [fName, lName, email, userAge, id]
+    )
+    .then(response => response.rows);
 };
 
 const deleteUser = (req, res) => {
