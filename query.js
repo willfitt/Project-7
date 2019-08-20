@@ -68,10 +68,21 @@ const deleteUser = (req, res) => {
     .then(response => response.rows);
 };
 
+const findUsers = () =>
+  pool
+    .query("SELECT * FROM users ORDER BY id ASC")
+    .then(response => response.rows);
+
+const sortUsers = (req, res) => {
+
+}
+
 module.exports = {
   getUsers,
   getUserById,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  findUsers,
+  sortUsers
 };

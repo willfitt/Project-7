@@ -34,9 +34,12 @@ app.post("/createUser", (req, res) => {
 
 // app.post('/sortUser', db.sortUser); implement??
 
-// app.post('/findUsers', db.findUsers, (req, res) => {
-//         res.render('userListing');
-// });  implement?
+app.post('/findUsers', (req, res) => {
+  db.findUsers()
+    .then(users => {
+      res.render("userListing", { users: users });
+    });
+});
 
 app.post("/editUser/:id", (req, res) => {
   db.updateUser(req, res)
