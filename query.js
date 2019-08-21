@@ -73,9 +73,6 @@ const findUsers = () =>
     .query("SELECT * FROM users ORDER BY id ASC")
     .then(response => response.rows);
 
-const sortUsers = (req, res) => {
-
-}
 
 module.exports = {
   getUsers,
@@ -83,6 +80,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  findUsers,
-  sortUsers
+  findUsers
 };

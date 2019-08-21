@@ -32,8 +32,6 @@ app.post("/createUser", (req, res) => {
     .then(() => res.redirect("/userListing"));
 });
 
-// app.post('/sortUser', db.sortUser); implement??
-
 app.post('/findUsers', (req, res) => {
   db.findUsers()
     .then(users => {
