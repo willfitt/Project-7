@@ -61,18 +61,21 @@ const deleteUser = (req, res) => {
   const id = parseInt(req.params.id);
   console.log(`deleteUser id: ${id}`);
 
-  return pool.
-    query(
+  return pool
+    .query(
       "DELETE FROM users WHERE id = $1", [id]
     )
     .then(response => response.rows);
 };
 
-const findUsers = () =>
-  pool
-    .query("SELECT * FROM users ORDER BY id ASC")
-    .then(response => response.rows);
+const findUser = (req, res) => {
+  const firstName = req.body.fName
+  console.log(req.body.fName)
 
+  return pool
+    .query("SELECT * FROM users where fName = $1", [firstName])
+    .then(response => response.rows[0]);
+};
 
 module.exports = {
   getUsers,
@@ -80,5 +83,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  findUsers
+  findUser
 };

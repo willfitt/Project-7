@@ -27,17 +27,18 @@ app.get("/user/edit/:id", (req, res) => {
     });
 });
 
+app.get('/findUser', (req, res) => {
+  db.findUser(req)
+    .then(users => {
+      res.render("userListing", { users: users });
+    });
+});
+
 app.post("/createUser", (req, res) => {
   db.createUser(req, res)
     .then(() => res.redirect("/userListing"));
 });
 
-app.post('/findUsers', (req, res) => {
-  db.findUsers()
-    .then(users => {
-      res.render("userListing", { users: users });
-    });
-});
 
 app.post("/editUser/:id", (req, res) => {
   db.updateUser(req, res)
