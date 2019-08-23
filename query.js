@@ -1,5 +1,5 @@
 const Pool = require("pg").Pool;
-const connectionString = process.env.DATABASE_URL
+const connectionString = process.env.DATABASE_URL || "postgres://postgres:postgres@localhost:5432/Users";
 
 console.log(`DATABASE_URL: ${connectionString}`);
 // console.log('der', process.env)
