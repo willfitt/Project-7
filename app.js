@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   res.render("createUser");
 });
 
-app.get("/userListing", (req, res) => {
+app.get("/userList", (req, res) => {
   db.getUsers()
     .then(users => {
       res.render("userListing", { users: users });
@@ -27,7 +27,7 @@ app.get("/user/edit/:id", (req, res) => {
     });
 });
 
-app.get('/findUser', (req, res) => {
+app.post('/findUser', (req, res) => {
   db.findUser(req)
     .then(users => {
       res.render("userListing", { users: users });
@@ -36,18 +36,18 @@ app.get('/findUser', (req, res) => {
 
 app.post("/createUser", (req, res) => {
   db.createUser(req, res)
-    .then(() => res.redirect("/userListing"));
+    .then(() => res.redirect("/userList"));
 });
 
 
 app.post("/editUser/:id", (req, res) => {
   db.updateUser(req, res)
-    .then((req) => res.redirect("/userListing"));
+    .then((req) => res.redirect("/userList"));
 });
 
 app.post("/deleteUser/:id", (req, res) => {
   db.deleteUser(req, res)
-    .then(() => res.redirect("/userListing"));
+    .then(() => res.redirect("/userList"));
 });
 
 app.listen(port, () => {

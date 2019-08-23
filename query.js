@@ -69,12 +69,17 @@ const deleteUser = (req, res) => {
 };
 
 const findUser = (req, res) => {
-  const firstName = req.body.fName
-  console.log(req.body.fName)
-
-  return pool
-    .query("SELECT * FROM users where fName = $1", [firstName])
-    .then(response => response.rows[0]);
+  const name = req.body.name
+  console.log(name)
+  if (name === '') {
+    return pool
+      .query("SELECT * FROM users ORDER BY id ASC")
+      .then(response => response.rows);
+  } else {
+    return pool
+      .query(`SELECT * FROM users WHERE "fName" = $1 OR "lName" = $1`, [name])
+      .then(response => response.rows);
+  }
 };
 
 module.exports = {

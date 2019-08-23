@@ -10,11 +10,11 @@ html
             include sort.js
             include domReady.js
         div
-            form(action='/findUser/' method='GET')
+            form(action='/findUser/' method='POST')
                 div Search by name
                 div
-                    label(for='fName')
-                    input(id='fName', name='fName')
+                    label(for='name')
+                    input(id='name', name='name')
                 div
                     input(type='submit' value='Go')        
         table(class='ui sortable celled table')
